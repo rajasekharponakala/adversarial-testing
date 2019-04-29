@@ -16,10 +16,10 @@ import os
 epsilons = [0, .05, .1, .15, .2, .25, .3]
 pretrained_model = "/home/raja/Documents/raja/torchexp/standard_googlenet.pth"
 use_cuda=True
-datadir = "/home/raja/Documents/raja/torchexp/data"
+#datadir = "/home/raja/Documents/raja/torchexp/data"
 
-vtype_train = datasets.ImageFolder(os.path.join(datadir, "/train"), transforms.Compose([transforms.RandomResizedCrop(224), transforms.RandomHorizontalFlip(), transforms.ToTensor(),  transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
-vtype_test = datasets.ImageFolder(os.path.join("datadir, "/val"), transforms.Compose([transforms.Resize(256), transforms.CenterCrop(224), transforms.ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
+vtype_train = datasets.ImageFolder(os.path.join("/home/raja/Documents/raja/torchexp/data/train"), transforms.Compose([transforms.RandomResizedCrop(224), transforms.RandomHorizontalFlip(), transforms.ToTensor(),  transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
+vtype_test = datasets.ImageFolder(os.path.join("/home/raja/Documents/raja/torchexp/data/val"), transforms.Compose([transforms.Resize(256), transforms.CenterCrop(224), transforms.ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
 train_loader = DataLoader(vtype_train, batch_size = 96, shuffle=True)
 test_loader = DataLoader(vtype_test, batch_size = 1, shuffle=True)
 # Define what device we are using
