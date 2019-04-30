@@ -14,12 +14,12 @@ import matplotlib.pyplot as plt
 import os
 
 epsilons = [0, .05, .1, .15, .2, .25, .3]
-pretrained_model = "/home/raja/Documents/raja/torchexp/standard_googlenet.pth"
+pretrained_model = "googlenet/standard_googlenet.pth"
 use_cuda=True
 #datadir = "/home/raja/Documents/raja/torchexp/data"
 
-vtype_train = datasets.ImageFolder(os.path.join("/home/raja/Documents/raja/torchexp/data/train"), transforms.Compose([transforms.RandomResizedCrop(224), transforms.RandomHorizontalFlip(), transforms.ToTensor(),  transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
-vtype_test = datasets.ImageFolder(os.path.join("/home/raja/Documents/raja/torchexp/data/val"), transforms.Compose([transforms.Resize(256), transforms.CenterCrop(224), transforms.ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
+vtype_train = datasets.ImageFolder(os.path.join("/usr/home/st119220/torchex1/data/train"), transforms.Compose([transforms.RandomResizedCrop(224), transforms.RandomHorizontalFlip(), transforms.ToTensor(),  transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
+vtype_test = datasets.ImageFolder(os.path.join("/usr/home/st119220/torchex1/data/val"), transforms.Compose([transforms.Resize(256), transforms.CenterCrop(224), transforms.ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
 train_loader = DataLoader(vtype_train, batch_size = 96, shuffle=True)
 test_loader = DataLoader(vtype_test, batch_size = 1, shuffle=True)
 # Define what device we are using
@@ -27,6 +27,7 @@ print("CUDA Available: ",torch.cuda.is_available())
 device = torch.device("cuda" if (use_cuda and torch.cuda.is_available()) else "cpu")
 
 Net = models.googlenet(num_classes =5)
+
 num_ftrs = Net.aux1.fc2.in_features
 Net.aux1.fc2 = nn.Linear(num_ftrs, 5)
         
